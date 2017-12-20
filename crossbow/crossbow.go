@@ -1,21 +1,30 @@
 package crossbow
 
 import (
+	"fmt"
 	"net/http"
-	"turtle/views"
+	"strconv"
 	"turtle/culi"
+	"turtle/sessions"
+	"turtle/views"
 )
 
-func LogIn(w http.ResponseWriter, r *http.Request)  {
-	r.ParseForm()
-
-	username := r.Form["username"]
-	password := r.Form["password"]
-
-	if culi.ValidUser(username[0], password[0]) {
-		views.ShowHome(w, r)
+func Weed(w http.ResponseWriter, r *http.Request) {
+	if sessions.IsLoggedIn(r) {
+		views.ShowHome(w, sessions.GetCurrentUserName(r))
 		return
 	} else {
-		views.ShowLoginFailed(w)
+		views.ShowLogin(w)
+		return
 	}
+}
+
+func UltraWeed(w http.ResponseWriter, r *http.Request) {
+	teststr := r.URL.Path[len("/weed/"):]
+	test, _ := strconv.Atoi(teststr)
+
+	user := culi.GetUser(teststr)
+	fmt.Fprint(w, teststr, test)
+	fmt.Fprint(w, user)
+
 }
