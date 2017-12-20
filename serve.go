@@ -5,17 +5,16 @@ import (
 	"net/http"
 
 	"fmt"
-	"turtle/scout"
+	"turtle/routing"
 )
 
 func main() {
 	configuration, err := ReadConfig()
-	if err!= nil{
+	if err != nil {
 		configuration.ServerPort = ":7749"
 	}
 
-
-	router := scout.Routing()
+	router := routing.Routing()
 
 	//router.Handle("/static/", http.FileServer(http.Dir("./views/public")))
 	fmt.Println("httpdir ./views/public")

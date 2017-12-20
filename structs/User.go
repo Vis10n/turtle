@@ -7,5 +7,5 @@ type User struct {
 	Title      string `json:title`
 	IsLeader   int    `json:is_leader`
 	Department string `json:department`
-	Avatar string `json:avatar`
+	Avatar     string `json:avatar`
 }

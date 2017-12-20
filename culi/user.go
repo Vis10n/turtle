@@ -11,49 +11,49 @@ func CreateUser(username, password, name, department string) error {
 	return err
 }
 
-func ValidUser(username, password string)bool{
+func ValidUser(username, password string) bool {
 	var correctPassword string
 	usersSQL := "select password from users where username=?"
 	log.Print("validating user ", username)
 	rows := database.query(usersSQL, username)
 
-	if rows.Next(){
-		err:=rows.Scan(&correctPassword)
-		if err!= nil{
+	if rows.Next() {
+		err := rows.Scan(&correctPassword)
+		if err != nil {
 			return false
 		}
 	}
-	if password == correctPassword{
+	if password == correctPassword {
 		return true
 	}
 	rows.Close()
 	return false
 }
 
-func GetUserID(username string) (int, error){
+func GetUserID(username string) (int, error) {
 	userID := -1
 	usersSQL := "select userID from users where username=?"
 	rows := database.query(usersSQL, username)
 	defer rows.Close()
 
-	if rows.Next(){
+	if rows.Next() {
 		err := rows.Scan(&userID)
-		if  err!=nil{
+		if err != nil {
 			return -1, err
 		}
 	}
 	return userID, nil
 }
 
-func GetUser(username string) *structs.User{
+func GetUser(username string) *structs.User {
 	user := structs.User{}
 	usersSQL := "select name, avatar, title, department, from users where username=?"
 	rows := database.query(usersSQL, username)
 	defer rows.Close()
 
-	if rows.Next(){
-		err := rows.Scan(&user.Name,&user.Avatar,&user.Title,&user.Department)
-		if  err!=nil{
+	if rows.Next() {
+		err := rows.Scan(&user.Name, &user.Avatar, &user.Title, &user.Department)
+		if err != nil {
 			log.Print(err)
 			return nil
 		}
@@ -62,15 +62,15 @@ func GetUser(username string) *structs.User{
 	return &user
 }
 
-func GetUserByID(userID int) *structs.User{
+func GetUserByID(userID int) *structs.User {
 	user := structs.User{}
 	usersSQL := "select name, avatar, title, department from users where userID=?"
 	rows := database.query(usersSQL, userID)
 	defer rows.Close()
 
-	if rows.Next(){
-		err := rows.Scan(&user.Name,&user.Avatar,&user.Title,&user.Department)
-		if  err!=nil{
+	if rows.Next() {
+		err := rows.Scan(&user.Name, &user.Avatar, &user.Title, &user.Department)
+		if err != nil {
 			log.Print(err)
 			return nil
 		}
@@ -79,15 +79,15 @@ func GetUserByID(userID int) *structs.User{
 	return &user
 }
 
-func GetTeams(teamID string) (usersID []int){
+func GetTeams(teamID string) (usersID []int) {
 	usersSQL := "select userID from users where teamID=?"
 	rows := database.query(usersSQL, teamID)
 	defer rows.Close()
 
 	var userID int
-	for rows.Next(){
+	for rows.Next() {
 		err := rows.Scan(&userID)
-		if  err!=nil{
+		if err != nil {
 			log.Print(err)
 		}
 		usersID = append(usersID, userID)

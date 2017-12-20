@@ -1,8 +1,8 @@
 package culi
 
-import(
-	_ "github.com/go-sql-driver/mysql"
+import (
 	"database/sql"
+	_ "github.com/go-sql-driver/mysql"
 	"log"
 )
 
@@ -10,42 +10,41 @@ var dataSourceName = "root:',.flacless@tcp(127.0.0.1:3306)/callogit?charset=utf8
 var database Database
 var err error
 
-
-type Database struct{
+type Database struct {
 	db *sql.DB
 }
 
-func init(){
+func init() {
 	database.db, err = sql.Open("mysql", dataSourceName)
 	err = database.db.Ping()
-	if err!=nil {
+	if err != nil {
 		log.Fatal(err)
-	}	else{
+	} else {
 		log.Println("Database init()")
 	}
 }
 
-func (db Database) begin() (tx *sql.Tx){
+func (db Database) begin() (tx *sql.Tx) {
 	tx, e := db.db.Begin()
-	if e!=nil{
+	if e != nil {
 		log.Println(e)
 		return nil
 	}
 	return tx
 }
 
-func (db Database) prepare(q string)(stmt *sql.Stmt)  {
+func (db Database) prepare(q string) (stmt *sql.Stmt) {
 	stmt, e := db.db.Prepare(q)
-	if e!= nil{
+	if e != nil {
 		log.Println(e)
 		return nil
 	}
 	return stmt
 }
 
-func (db Database)query(q string, args ...interface{}) (rows *sql.Rows){
+func (db Database) query(q string, args ...interface{}) (rows *sql.Rows) {
 	rows, err := db.db.Query(q, args...)
-	if err != nil{
+	if err != nil {
 		log.Println(err)
 		return nil
 	}
@@ -71,6 +70,6 @@ func taskQuery(sql string, args ...interface{}) error {
 	return err
 }
 
-func Close(){
+func Close() {
 	database.db.Close()
 }
