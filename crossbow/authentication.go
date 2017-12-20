@@ -60,3 +60,14 @@ func SignUp(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 }
+
+func LogOut(w http.ResponseWriter, r *http.Request) {
+	session, err := sessions.Store.Get(r, "session")
+	if err == nil {
+		if session.Values["loggedin"] != "false" {
+			session.Values["loggedin"] = "false"
+			session.Save(r, w)
+		}
+	}
+	http.Redirect(w, r, "/", 302)
+}

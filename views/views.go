@@ -26,6 +26,7 @@ func ShowLoginFailed(w http.ResponseWriter) {
 func ShowHome(w http.ResponseWriter, username string) {
 	//todo: create homepage
 	homeTemplate.Execute(w, nil)
+	fmt.Fprint(w, username)
 }
 
 func ShowSignUpForm(w http.ResponseWriter) {
