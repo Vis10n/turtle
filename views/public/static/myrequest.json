@@ -1,0 +1,6 @@
+[
+	{"ID":"1","Des":"Sửa máy tính","Team":"nhóm 1","Prio":"rất cao","careteDate":"2017-1-1","deadline":"2017-2-2","stat":"hoàn thành"},
+	{"ID":"2","Des":"Kiểm tra bàn phím","Team":"nhóm 2","Prio":"rất cao","careteDate":"2017-1-1","deadline":"2017-2-2","stat":"hoàn thành"},
+	{"ID":"3","Des":"Cài lại win","Team":"nhóm 1","Prio":"rất cao","careteDate":"2017-1-1","deadline":"2017-2-2","stat":"Quá hạn"},
+	{"ID":"4","Des":"sửa máy in","Team":"nhóm 2","Prio":"rất cao","careteDate":"2017-1-1","deadline":"2017-2-2","stat":"Đang thực hiện"}
+]

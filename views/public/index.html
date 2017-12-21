@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Starlight Responsive Bootstrap 4 Admin Template</title>
+    <title>IT On-Call</title>
 
     <!-- vendor css -->
     <link href="static/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
@@ -15,123 +15,153 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="static/css/starlight.css">
+	<!-- Jquery -->
+	<script src="static/js/jquery-3.2.1.min.js"></script>
+	<script src="static/js/an.js"></script>
+	<script src ="static/js/filter.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#allRequest").click(function(){
+				//$("#main-content").html(readAllRequest());
+				readAllRequest();
+			});
+			$("#all-my-task").click(function(){
+				readAlltask();
+			});
+			$("#allRelativeJob").click(function(){
+				
+			});
+			$("#addrequest").click(function(){
+				var htmlcode = 	'<form action="/add-request" method="POST">'
+								+'<table>'
+									+'<tr>'
+										+'<th style="width:100%;">Tên công việc<p style="color:red;">*</p></th>'	
+									+'</tr>'
+									+'<tr>'
+										+'<td>'
+											+'<input type="text" style="width:100%;" name="requestName"><br>'
+										+'</td>'
+									+'</tr>'
+								+'</table>'		
+								+'<table style="width:100%;">'
+									+'<tr style="width:100%;">'
+										+'<th style="width:50%;">Mức độ ưu tiên</th>'
+										+'<th style="width:50%;">Ngày hết hạn<p style="color:red;">*</p></th>'
+									+'</tr>'
+									+'<tr>'
+										+'<td><input type="text" style="width:90%;" name="Priority"></td>'
+										+'<td><input type="text" style="width:90%;" name="Deadline" ></td>'
+									+'</tr>'
+									
+								+'</table>'
+								+'<table style="width:100%;">'
+									+'<tr style="width:100%;">'
+										+'<th style="width:50%;">Bộ phận IT</th>'
+										+'<th style="width:50%;">Người liên quan<p style="color:red;">*</p></th>'
+									+'</tr>'
+									+'<tr>'
+										+'<td><input type="text" style="width:90%;" name="Team"></td>'
+										+'<td><input type="text" style="width:90%;" name="RelativePeople" ></td>'
+									+'</tr>'
+								+'</table>'
+								+'<p>Nội dung<p style="color:red;">*</p></p>'
+								+'<textarea class ="form-control" style="width:95%;height=75%;"></textarea>'
+								+'<input type="submit" value="Submit" class ="btn btn-success">'
+							+'</form>';	
+				$("#main-content").html(htmlcode);
+			});
+			$("#inputName").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+				$("#mytable tr").filter(function() {
+				  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+				});
+			 });
+			
+		//	$("#signout").on("click",function(){
+			//	$.post("logout");
+			//});
+		
+		});
+	</script>
+	
   </head>
 
   <body>
 
     <!-- ########## START: LEFT PANEL ########## -->
-    <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> starlight</a></div>
+    <div class="sl-logo"><a href=""><i class="icon ion-android-star-outline"></i> IT On-Call</a></div>
     <div class="sl-sideleft">
       <div class="input-group input-group-search">
-        <input type="search" name="search" class="form-control" placeholder="Search">
+		<button class="form-control" id="addrequest">Thêm yêu cầu</button>
         <span class="input-group-btn">
-          <button class="btn"><i class="fa fa-search"></i></button>
-        </span><!-- input-group-btn -->
-      </div><!-- input-group -->
+          <button class="btn" id="addrequest"><i class="fa fa-plus"></i></button>
+      </span>
+	  </div>
+	  <!-- input-group -->
 
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
         <a href="index.html" class="sl-menu-link active">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Dashboard</span>
+            <span class="menu-item-label">Trang chủ</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
-        <a href="widgets.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-photos-outline tx-20"></i>
-            <span class="menu-item-label">Cards &amp; Widgets</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
+
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Charts</span>
+            <i class="fa fa-dashboard"></i>
+            <span class="menu-item-label">Việc tôi yêu cầu</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="chart-morris.html" class="nav-link">Morris Charts</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
-          <li class="nav-item"><a href="chart-chartjs.html" class="nav-link">Chart JS</a></li>
-          <li class="nav-item"><a href="chart-rickshaw.html" class="nav-link">Rickshaw</a></li>
-          <li class="nav-item"><a href="chart-sparkline.html" class="nav-link">Sparkline</a></li>
+          <li class="nav-item" ><a href="#" id="allRequest" class="nav-link">    Tất cả</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-inprogess-request">    Đang xử lý</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-resolved-request">    Đã xong</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-out-date-request"> Quá hạn</a></li>
         </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-gear-outline tx-24"></i>
-            <span class="menu-item-label">Forms</span>
+            <i class="fa fa-dashboard"></i>
+            <span class="menu-item-label">Việc tôi được giao</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="form-elements.html" class="nav-link">Form Elements</a></li>
-          <li class="nav-item"><a href="form-layouts.html" class="nav-link">Form Layouts</a></li>
-          <li class="nav-item"><a href="form-validation.html" class="nav-link">Form Validation</a></li>
-          <li class="nav-item"><a href="form-wizards.html" class="nav-link">Form Wizards</a></li>
-          <li class="nav-item"><a href="form-editor-text.html" class="nav-link">Text Editor</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="all-my-task">    Tất cả</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-new-task">    Việc mới</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-inprogess-task">    Đang xử lý</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-resolved-task">    Đã xong</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-out-date-task"> Quá hạn</a></li>
         </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-filing-outline tx-24"></i>
-            <span class="menu-item-label">UI Elements</span>
+            <i class="fa fa-dashboard"></i>
+            <span class="menu-item-label">Công việc liên quan</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="accordion.html" class="nav-link">Accordion</a></li>
-          <li class="nav-item"><a href="alerts.html" class="nav-link">Alerts</a></li>
-          <li class="nav-item"><a href="buttons.html" class="nav-link">Buttons</a></li>
-          <li class="nav-item"><a href="cards.html" class="nav-link">Cards</a></li>
-          <li class="nav-item"><a href="icons.html" class="nav-link">Icons</a></li>
-          <li class="nav-item"><a href="modal.html" class="nav-link">Modal</a></li>
-          <li class="nav-item"><a href="navigation.html" class="nav-link">Navigation</a></li>
-          <li class="nav-item"><a href="pagination.html" class="nav-link">Pagination</a></li>
-          <li class="nav-item"><a href="popups.html" class="nav-link">Tooltip &amp; Popover</a></li>
-          <li class="nav-item"><a href="progress.html" class="nav-link">Progress</a></li>
-          <li class="nav-item"><a href="spinners.html" class="nav-link">Spinners</a></li>
-          <li class="nav-item"><a href="typography.html" class="nav-link">Typography</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="all-my-rela-task">Tất cả</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-new-rela-task">Mới</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-inprogess-rela-task">Đang xử lý</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-resolved-rela-task">Đã xong</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-out-date-rela-task">Quá hạn</a></li>
         </ul>
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-bookmarks-outline tx-20"></i>
-            <span class="menu-item-label">Tables</span>
+            <i class="fa fa-dashboard"></i>
+            <span class="menu-item-label">Công việc của nhớm</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="table-basic.html" class="nav-link">Basic Table</a></li>
-          <li class="nav-item"><a href="table-datatable.html" class="nav-link">Data Table</a></li>
-        </ul>
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-navigate-outline tx-24"></i>
-            <span class="menu-item-label">Maps</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="map-google.html" class="nav-link">Google Maps</a></li>
-          <li class="nav-item"><a href="map-vector.html" class="nav-link">Vector Maps</a></li>
-        </ul>
-        <a href="mailbox.html" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-email-outline tx-24"></i>
-            <span class="menu-item-label">Mailbox</span>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <a href="#" class="sl-menu-link">
-          <div class="sl-menu-item">
-            <i class="menu-item-icon icon ion-ios-paper-outline tx-22"></i>
-            <span class="menu-item-label">Pages</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
-          </div><!-- menu-item -->
-        </a><!-- sl-menu-link -->
-        <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="blank.html" class="nav-link">Blank Page</a></li>
-          <li class="nav-item"><a href="page-signin.html" class="nav-link">Signin Page</a></li>
-          <li class="nav-item"><a href="page-signup.html" class="nav-link">Signup Page</a></li>
-          <li class="nav-item"><a href="page-notfound.html" class="nav-link">404 Page Not Found</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="all-my-team-task">Tất cả</a></li>
+          <li class="nav-item"><a href="#" class="nav-link" id="my-new-team-task">Mới</a></li>
+		  <li class="nav-item"><a href="#" class="nav-link" id="my-inprogess-team-task">Đang xử lý</a></li>
+		  <li class="nav-item"><a href="#" class="nav-link" id="my-resolved-team-task">Đã xong</a></li>
+		  <li class="nav-item"><a href="#" class="nav-link" id="my-out-date-team-task">Quá hạn</a></li>
         </ul>
       </div><!-- sl-sideleft-menu -->
 
@@ -154,12 +184,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-                <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
-                <li><a href=""><i class="icon ion-ios-download-outline"></i> Downloads</a></li>
-                <li><a href=""><i class="icon ion-ios-star-outline"></i> Favorites</a></li>
-                <li><a href=""><i class="icon ion-ios-folder-outline"></i> Collections</a></li>
-                <li><a href=""><i class="icon ion-power"></i> Sign Out</a></li>
+                <li><a href="" id="profile"><i class="icon ion-ios-person-outline"></i>Chỉnh sửa thông tin cá nhân</a></li>
+                <li><a href="" id="setting"><i class="icon ion-ios-gear-outline"></i> Cài đặt</a></li>
+                <li><a href="/logout" id="signout"><i class="icon ion-power"></i>Đăng xuất</a></li>
               </ul>
             </div><!-- dropdown-menu -->
           </div><!-- dropdown -->
@@ -340,209 +367,11 @@
         <span class="breadcrumb-item active">Dashboard</span>
       </nav>
 
-      <div class="sl-pagebody">
+      <div class="sl-pagebody" >
 
-        <div class="row row-sm">
-          <div class="col-sm-6 col-xl-3">
-            <div class="card pd-20 bg-primary">
-              <div class="d-flex justify-content-between align-items-center mg-b-10">
-                <h6 class="tx-11 tx-uppercase mg-b-0 tx-spacing-1 tx-white">Today's Sales</h6>
-                <a href="" class="tx-white-8 hover-white"><i class="icon ion-android-more-horizontal"></i></a>
-              </div><!-- card-header -->
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-                <h3 class="mg-b-0 tx-white tx-lato tx-bold">$850</h3>
-              </div><!-- card-body -->
-              <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
-                <div>
-                  <span class="tx-11 tx-white-6">Gross Sales</span>
-                  <h6 class="tx-white mg-b-0">$2,210</h6>
-                </div>
-                <div>
-                  <span class="tx-11 tx-white-6">Tax Return</span>
-                  <h6 class="tx-white mg-b-0">$320</h6>
-                </div>
-              </div><!-- -->
-            </div><!-- card -->
-          </div><!-- col-3 -->
-          <div class="col-sm-6 col-xl-3 mg-t-20 mg-sm-t-0">
-            <div class="card pd-20 bg-info">
-              <div class="d-flex justify-content-between align-items-center mg-b-10">
-                <h6 class="tx-11 tx-uppercase mg-b-0 tx-spacing-1 tx-white">This Week's Sales</h6>
-                <a href="" class="tx-white-8 hover-white"><i class="icon ion-android-more-horizontal"></i></a>
-              </div><!-- card-header -->
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-                <h3 class="mg-b-0 tx-white tx-lato tx-bold">$4,625</h3>
-              </div><!-- card-body -->
-              <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
-                <div>
-                  <span class="tx-11 tx-white-6">Gross Sales</span>
-                  <h6 class="tx-white mg-b-0">$2,210</h6>
-                </div>
-                <div>
-                  <span class="tx-11 tx-white-6">Tax Return</span>
-                  <h6 class="tx-white mg-b-0">$320</h6>
-                </div>
-              </div><!-- -->
-            </div><!-- card -->
-          </div><!-- col-3 -->
-          <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
-            <div class="card pd-20 bg-purple">
-              <div class="d-flex justify-content-between align-items-center mg-b-10">
-                <h6 class="tx-11 tx-uppercase mg-b-0 tx-spacing-1 tx-white">This Month's Sales</h6>
-                <a href="" class="tx-white-8 hover-white"><i class="icon ion-android-more-horizontal"></i></a>
-              </div><!-- card-header -->
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-                <h3 class="mg-b-0 tx-white tx-lato tx-bold">$11,908</h3>
-              </div><!-- card-body -->
-              <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
-                <div>
-                  <span class="tx-11 tx-white-6">Gross Sales</span>
-                  <h6 class="tx-white mg-b-0">$2,210</h6>
-                </div>
-                <div>
-                  <span class="tx-11 tx-white-6">Tax Return</span>
-                  <h6 class="tx-white mg-b-0">$320</h6>
-                </div>
-              </div><!-- -->
-            </div><!-- card -->
-          </div><!-- col-3 -->
-          <div class="col-sm-6 col-xl-3 mg-t-20 mg-xl-t-0">
-            <div class="card pd-20 bg-sl-primary">
-              <div class="d-flex justify-content-between align-items-center mg-b-10">
-                <h6 class="tx-11 tx-uppercase mg-b-0 tx-spacing-1 tx-white">This Year's Sales</h6>
-                <a href="" class="tx-white-8 hover-white"><i class="icon ion-android-more-horizontal"></i></a>
-              </div><!-- card-header -->
-              <div class="d-flex align-items-center justify-content-between">
-                <span class="sparkline2">5,3,9,6,5,9,7,3,5,2</span>
-                <h3 class="mg-b-0 tx-white tx-lato tx-bold">$91,239</h3>
-              </div><!-- card-body -->
-              <div class="d-flex align-items-center justify-content-between mg-t-15 bd-t bd-white-2 pd-t-10">
-                <div>
-                  <span class="tx-11 tx-white-6">Gross Sales</span>
-                  <h6 class="tx-white mg-b-0">$2,210</h6>
-                </div>
-                <div>
-                  <span class="tx-11 tx-white-6">Tax Return</span>
-                  <h6 class="tx-white mg-b-0">$320</h6>
-                </div>
-              </div><!-- -->
-            </div><!-- card -->
-          </div><!-- col-3 -->
-        </div><!-- row -->
-
-        <div class="row row-sm mg-t-20">
-          <div class="col-xl-8">
-            <div class="card overflow-hidden">
-              <div class="card-header bg-transparent pd-y-20 d-sm-flex align-items-center justify-content-between">
-                <div class="mg-b-20 mg-sm-b-0">
-                  <h6 class="card-title mg-b-5 tx-13 tx-uppercase tx-bold tx-spacing-1">Profile Statistics</h6>
-                  <span class="d-block tx-12">October 23, 2017</span>
-                </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <a href="#" class="btn btn-secondary tx-12 active">Today</a>
-                  <a href="#" class="btn btn-secondary tx-12">This Week</a>
-                  <a href="#" class="btn btn-secondary tx-12">This Month</a>
-                </div>
-              </div><!-- card-header -->
-              <div class="card-body pd-0 bd-color-gray-lighter">
-                <div class="row no-gutters tx-center">
-                  <div class="col-12 col-sm-4 pd-y-20 tx-left">
-                    <p class="pd-l-20 tx-12 lh-8 mg-b-0">Note: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligulastatic.</p>
-                  </div><!-- col-4 -->
-                  <div class="col-6 col-sm-2 pd-y-20">
-                    <h4 class="tx-inverse tx-lato tx-bold mg-b-5">6,112</h4>
-                    <p class="tx-11 mg-b-0 tx-uppercase">Views</p>
-                  </div><!-- col-2 -->
-                  <div class="col-6 col-sm-2 pd-y-20 bd-l">
-                    <h4 class="tx-inverse tx-lato tx-bold mg-b-5">102</h4>
-                    <p class="tx-11 mg-b-0 tx-uppercase">Likes</p>
-                  </div><!-- col-2 -->
-                  <div class="col-6 col-sm-2 pd-y-20 bd-l">
-                    <h4 class="tx-inverse tx-lato tx-bold mg-b-5">343</h4>
-                    <p class="tx-11 mg-b-0 tx-uppercase">Comments</p>
-                  </div><!-- col-2 -->
-                  <div class="col-6 col-sm-2 pd-y-20 bd-l">
-                    <h4 class="tx-inverse tx-lato tx-bold mg-b-5">960</h4>
-                    <p class="tx-11 mg-b-0 tx-uppercase">Shares</p>
-                  </div><!-- col-2 -->
-                </div><!-- row -->
-              </div><!-- card-body -->
-              <div class="card-body pd-0">
-                <div id="rickshaw2" class="wd-100p ht-200"></div>
-              </div><!-- card-body -->
-            </div><!-- card -->
-
-            <div class="card pd-20 pd-sm-25 mg-t-20">
-              <h6 class="card-body-title tx-13">Horizontal Bar Chart</h6>
-              <p class="mg-b-20 mg-sm-b-30">A bar chart or bar graph is a chart with rectangular bars with lengths proportional to the values that they represent.</p>
-              <canvas id="chartBar4" height="300"></canvas>
-            </div><!-- card -->
-
-          </div><!-- col-8 -->
-          <div class="col-xl-4 mg-t-20 mg-xl-t-0">
-
-            <div class="card pd-20 pd-sm-25">
-              <h6 class="card-body-title">Pie Chart</h6>
-              <p class="mg-b-20 mg-sm-b-30">Labels can be hidden if the slice is less than a given percentage of the pie.</p>
-              <div id="flotPie2" class="ht-200 ht-sm-250"></div>
-            </div><!-- card -->
-
-            <div class="card widget-messages mg-t-20">
-              <div class="card-header">
-                <span>Messages</span>
-                <a href=""><i class="icon ion-more"></i></a>
-              </div><!-- card-header -->
-              <div class="list-group list-group-flush">
-                <a href="" class="list-group-item list-group-item-action media">
-                  <img src="static/img/img10.jpg" alt="">
-                  <div class="media-body">
-                    <div class="msg-top">
-                      <span>Mienard B. Lumaad</span>
-                      <span>4:09am</span>
-                    </div>
-                    <p class="msg-summary">Many desktop publishing packages and web page editors now usestatic.</p>
-                  </div><!-- media-body -->
-                </a><!-- list-group-item -->
-                <a href="" class="list-group-item list-group-item-action media">
-                  <img src="static/img/img9.jpg" alt="">
-                  <div class="media-body">
-                    <div class="msg-top">
-                      <span>Isidore Dilao</span>
-                      <span>Yesterday 3:00am</span>
-                    </div>
-                    <p class="msg-summary">On the other hand, we denounce with righteous indignation and dislikestatic.</p>
-                  </div><!-- media-body -->
-                </a><!-- list-group-item -->
-                <a href="" class="list-group-item list-group-item-action media">
-                  <img src="static/img/img8.jpg" alt="">
-                  <div class="media-body">
-                    <div class="msg-top">
-                      <span>Kirby Avendula</span>
-                      <span>Yesterday 3:00am</span>
-                    </div>
-                    <p class="msg-summary">It is a long established fact that a reader will be distracted by the readablestatic.</p>
-                  </div><!-- media-body -->
-                </a><!-- list-group-item -->
-                <a href="" class="list-group-item list-group-item-action media">
-                  <img src="static/img/img7.jpg" alt="">
-                  <div class="media-body">
-                    <div class="msg-top">
-                      <span>Roven Galeon</span>
-                      <span>Yesterday 3:00am</span>
-                    </div>
-                    <p class="msg-summary">Than the fact that climate change may be causing it to rapidly disappearstatic. </p>
-                  </div><!-- media-body -->
-                </a><!-- list-group-item -->
-              </div><!-- list-group -->
-              <div class="card-footer">
-                <a href="" class="tx-12"><i class="fa fa-angle-down mg-r-3"></i> Load more messages</a>
-              </div><!-- card-footer -->
-            </div><!-- card -->
-          </div><!-- col-3 -->
-        </div><!-- row -->
+			<section class="content" id="main-content">
+			<p>alohadance</p>
+			</section>
 
       </div><!-- sl-pagebody -->
       <footer class="sl-footer">
