@@ -96,3 +96,39 @@ function readAlltask(){
 function showfunction(){
 	document.getElementById("mytable").innerHTML="<p>ahahah</p>";
 }
+
+
+function readRequest(data){
+	var jdata,i,htmlcode,table,td,text,input;
+			jdata = JSON.parse(data);
+			htmlcode = '<table id="mytable" class="table table-striped table-bordered table-hover table-condensed">'
+				+'<tr>'
+				+'<th style="width:5%;">ID</th><th style="width:30%;">tên công việc</th>'
+				+'<th style="width:10%;">nhóm thực hiện</th><th style="width:10%;">mức độ ưu tiên</th>'
+				+'<th style="width:15%;">ngày khởi tạo</th><th style="width:15%;">ngày hết hạn</th>'
+				+'<th style="width:15%;">trạng thái</th>'
+				+'</tr>';
+				htmlcode+='<tr>'
+				+'<td></td>'
+				+'<td><input id="inputName" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control"  onkeyup="myFunction(this.id)" ></input></td>'
+				+'<td><input id="inputPrio" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td>'
+				+'<td><input id="inputTeam" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td>'
+				+'<td><input id="inputCDate" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td>'
+				+'<td><input id="inputDate" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td>'
+				+'<td><input id="inputStat" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td></tr>';
+				var n = data.length;
+				for(i = 0 ; i <n;i++){
+					htmlcode+="<tr onclick='showfunction()'>"
+							+"<td><a href='#' >"+data[i].ID+"</a></td>"
+						 +"<td><a href='#' >"+data[i].Des+"</a></td>"
+						 +"<td><a href='#'>"+data[i].Team+"</a></td>"
+						 +"<td><a href='#'>"+data[i].Prio+"</a></td>"
+						 +"<td><a href='#'>"+data[i].createDate+"</a></td>"
+						 +"<td><a href='#'>"+data[i].deadline+"</a></td>"
+						 +"<td><a href='#'>"+data[i].stat+"</a></td>"
+						 +"</tr>";
+				}
+				htmlcode+="</table>";
+				//return htmlcode;
+				document.getElementById("main-content").innerHTML=htmlcode;
+}

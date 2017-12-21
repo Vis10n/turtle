@@ -22,6 +22,9 @@
 	<script>
 		$(document).ready(function(){
 			$("#allRequest").click(function(){
+				$.get("/all-my-request",function(data){
+					readRequest(data);
+				});
 				//$("#main-content").html(readAllRequest());
 				readAllRequest();
 			});
@@ -116,7 +119,7 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item" ><a href="/all-my-request" id="allRequest" class="nav-link">    Tất cả</a></li>
+          <li class="nav-item" ><a href="#" id="allRequest" class="nav-link">    Tất cả</a></li>
           <li class="nav-item"><a href="#" class="nav-link" id="my-inprogess-request">    Đang xử lý</a></li>
           <li class="nav-item"><a href="#" class="nav-link" id="my-resolved-request">    Đã xong</a></li>
           <li class="nav-item"><a href="#" class="nav-link" id="my-out-date-request"> Quá hạn</a></li>
