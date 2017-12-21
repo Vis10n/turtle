@@ -23,6 +23,7 @@ func main() {
 
 	http.HandleFunc("/", crossbow.Weed)
 	http.HandleFunc("/login", crossbow.LogIn)
+	http.HandleFunc("/signup", crossbow.SignUp)
 	http.HandleFunc("/logout", crossbow.LogOut)
 
 	http.HandleFunc("/weed/", crossbow.UltraWeed)

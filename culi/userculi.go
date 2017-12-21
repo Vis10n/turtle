@@ -16,7 +16,7 @@ func ValidUser(username, password string) bool {
 	usersSQL := "select password from users where username=?"
 	log.Print("validating user ", username)
 	rows := database.query(usersSQL, username)
-
+	defer rows.Close()
 	if rows.Next() {
 		err := rows.Scan(&correctPassword)
 		if err != nil {
@@ -24,9 +24,10 @@ func ValidUser(username, password string) bool {
 		}
 	}
 	if password == correctPassword {
+		log.Print(username + " validated")
 		return true
 	}
-	rows.Close()
+
 	return false
 }
 
@@ -93,4 +94,16 @@ func GetTeams(teamID int) (usersID []int) {
 		usersID = append(usersID, userID)
 	}
 	return usersID
+}
+
+func GetAllUserName() (AllUserName []string) {
+	usersSQL := "select username from users"
+	rows := database.query(usersSQL)
+	defer rows.Close()
+	for rows.Next() {
+		temp := ""
+		rows.Scan(&temp)
+		AllUserName = append(AllUserName, temp)
+	}
+	return AllUserName
 }

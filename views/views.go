@@ -11,15 +11,15 @@ var templates = template.Must(template.ParseGlob(templateDir + "*.html"))
 var message string
 var err error
 
-var loginTemplate = templates.Lookup("login.html")
-var homeTemplate = templates.Lookup("home.html")
+var pageSigninTemplate = templates.Lookup("page-signin.html")
+var homeTemplate = templates.Lookup("index.html")
 
 //TODO: chia ra xử lý
 func ShowLogin(w http.ResponseWriter) {
-	loginTemplate.Execute(w, nil)
+	pageSigninTemplate.Execute(w, nil)
 }
 func ShowLoginFailed(w http.ResponseWriter) {
-	loginTemplate.Execute(w, nil)
+	pageSigninTemplate.Execute(w, nil)
 	fmt.Fprint(w, "Sai tên đăng nhập hoặc mật khẩu")
 }
 
