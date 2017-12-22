@@ -32,23 +32,29 @@ function myFunction(input) {
   for (i = 2; i < tr.length; i++) {
 	  switch(input){
 		case "inputName":
-			td = tr[i].getElementsByTagName("td")[1];
+			td = tr[i].getElementsByTagName("td")[0];
 			break;
 		case "inputPrio":
-			td = tr[i].getElementsByTagName("td")[2];
+			td = tr[i].getElementsByTagName("td")[1];
 			break;
 		case "inputTeam":
-			td = tr[i].getElementsByTagName("td")[3];
+			td = tr[i].getElementsByTagName("td")[2];
 			break;
 		case "inputDate":
-			td = tr[i].getElementsByTagName("td")[5];
-			break;
-		case "inputCDate":
 			td = tr[i].getElementsByTagName("td")[4];
 			break;
-		default:
+		case "inputCDate":
+			td = tr[i].getElementsByTagName("td")[3];
+			break;
+		case "inputCompletedDate":
+			td = tr[i].getElementsByTagName("td")[5];
+			break;
+		case "inputStat":
 			td = tr[i].getElementsByTagName("td")[6];
-			//break;
+			break;
+		default:
+			td = tr[i].getElementsByTagName("td")[7];
+			break;
 	  }
     if (td) {
       if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {

@@ -22,70 +22,16 @@
 	<script>
 		$(document).ready(function(){
 			$("#allRequest").click(function(){
-			
-				/*$.get("http://localhost:7749/all-my-request",function(data){
+				$.get("/all-my-request",function(data){
 					readRequest(data);
-				});*/
-				readAllRequest();
-				/*$.ajax({
-					url:"allmyrequest.json",
-					type: "get",
-					dataType: "json"}).done(function(res){
-						readRequest(res);
-					});*/
-			});
-			$("#my-inprogess-request").click(function(){
-				
-			});
-			$("#my-resolved-request").click(function(){
-				
-			});
-			$("#my-out-date-request").click(function(){
-				
+				});
+				//$("#main-content").html(readAllRequest());
+				//readAllRequest();
 			});
 			$("#all-my-task").click(function(){
 				readAlltask();
 			});
-			$("#my-new-task").click(function(){
-				
-			});
-			$("#my-inprogess-task").click(function(){
-				
-			});
-			$("#my-resolved-task").click(function(){
-				
-			});
-			$("#my-out-date-task").click(function(){
-				
-			});
-			$("#all-my-rela-task").click(function(){
-				
-			});
-			$("#my-inprogess-rela-task").click(function(){
-				
-			});
-			$("#my-new-rela-task").click(function(){
-				
-			});
-			$("#my-resolved-rela-task").click(function(){
-				
-			});
-			$("#my-out-date-rela-task").click(function(){
-				
-			});
-			$("#all-team-task").click(function(){
-				
-			});
-			$("#my-inprogess-team-task").click(function(){
-				
-			});
-			$("#my-new-team-task").click(function(){
-				
-			});
-			$("#my-resolved-team-task").click(function(){
-				
-			});
-			$("#my-out-date-team-task").click(function(){
+			$("#allRelativeJob").click(function(){
 				
 			});
 			$("#addrequest").click(function(){
@@ -433,9 +379,13 @@
       </div><!-- sl-pagebody -->
       <footer class="sl-footer">
         <div class="footer-left">
-          
+          <div class="mg-b-2">Copyright &copy; 2017. Starlight. All Rights Reserved.</div>
+          <div>Made by ThemePixels.</div>
         </div>
         <div class="footer-right d-flex align-items-center">
+          <span class="tx-uppercase mg-r-10">Share:</span>
+          <a target="_blank" class="pd-x-5" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//themepixels.me/starlight"><i class="fa fa-facebook tx-20"></i></a>
+          <a target="_blank" class="pd-x-5" href="https://twitter.com/home?status=Starlight,%20your%20best%20choice%20for%20premium%20quality%20admin%20template%20from%20Bootstrap.%20Get%20it%20now%20at%20http%3A//themepixels.me/starlight"><i class="fa fa-twitter tx-20"></i></a>
         </div>
       </footer>
     </div><!-- sl-mainpanel -->
