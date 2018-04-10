@@ -23,10 +23,10 @@
 		$(document).ready(function(){
 			$("#allRequest").click(function(){
 			
-				/*$.get("http://localhost:7749/all-my-request",function(data){
+				$.get("http://localhost:7749/all-my-request",function(data){
 					readRequest(data);
-				});*/
-				readAllRequest();
+				});
+				//readAllRequest();
 				/*$.ajax({
 					url:"allmyrequest.json",
 					type: "get",
@@ -97,7 +97,7 @@
 									+'<tr>'
 										+'<td>'
 											+'<input type="text" style="width:100%;" name="requestName"><br>'
-										+'</td>'
+										+'</td>' 
 									+'</tr>'
 								+'</table>'		
 								+'<table style="width:100%;">'
@@ -109,7 +109,6 @@
 										+'<td><input type="text" style="width:90%;" name="Priority"></td>'
 										+'<td><input type="text" style="width:90%;" name="Deadline" ></td>'
 									+'</tr>'
-									
 								+'</table>'
 								+'<table style="width:100%;">'
 									+'<tr style="width:100%;">'

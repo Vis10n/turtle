@@ -6,13 +6,14 @@ function readAllRequest(){
 			data = JSON.parse(this.responseText);
 			htmlcode = '<table id="mytable" class="table table-striped table-bordered table-hover table-condensed">'
 				+'<tr>'
-				+'<th style="width:25%;">tên công việc</th>'
-				+'<th style="width:10%;">mức độ ưu tiên</th>'
-				+'<th style="width:10%;">nhóm thực hiện</th>'
-				+'<th style="width:15%;">ngày khởi tạo</th>'
-				+'<th style="width:15%;">ngày hết hạn</th>'
-				+'<th style="width:15%;">ngày hoàn thành</th>'
-				+'<th style="width:10%;">trạng thái</th>'
+				+'<th style="width:15%;">tên công việc</th>'
+				+'<th style="width:25%;">Đặc tả</th>'
+				+'<th style="width:7.5%;">mức độ ưu tiên</th>'
+				+'<th style="width:7.5%;">nhóm thực hiện</th>'
+				+'<th style="width:12.5%;">ngày khởi tạo</th>'
+				+'<th style="width:12.5%;">ngày hết hạn</th>'
+				+'<th style="width:12.5%;">ngày hoàn thành</th>'
+				+'<th style="width:7.5%;">trạng thái</th>'
 				+'</tr>';
 				htmlcode+='<tr>'
 				+'<td><input id="inputName" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control"  onkeyup="myFunction(this.id)" ></input></td>'
@@ -24,7 +25,7 @@ function readAllRequest(){
 				+'<td><input id="inputStat" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td></tr>';
 				var n = data.length;
 				for(i = 0 ; i <n;i++){
-					htmlcode+="<tr onclick='showfunction()'>"
+					htmlcode+="<tr onclick='showfunction(this)' id='mytablerow'>"
 						 +"<td><a href='#'>"+data[i].ReqSpec+"</a></td>"
 						 +"<td><a href='#'>"+data[i].Priority+"</a></td>"
 						 +"<td><a href='#'>"+data[i].TeamName+"</a></td>"
@@ -38,7 +39,7 @@ function readAllRequest(){
 				document.getElementById("main-content").innerHTML=htmlcode;
 		}
 	};
-  xhttp.open("GET", "/all-my-request", true);
+  xhttp.open("GET", "http://localhost:7749/all-my-request", true);
   xhttp.send();
 	
 }
@@ -90,8 +91,9 @@ function readAlltask(){
 		xhttp.send();
 	
 }
-function showfunction(){
-	document.getElementById("mytable").innerHTML="<p>ahahah</p>";
+function showfunction(tr){
+	var td, data;
+	td=tr.document.getElementsByTagName("td");
 }
 
 
@@ -100,14 +102,14 @@ function readRequest(data){
 	//var data = JSON.parse(jdata);
 			htmlcode = '<table id="mytable" class="table table-striped table-bordered table-hover table-condensed">'
 				+'<tr>'
-				+'<th style="width:30%;">tên công việc</th>'
+				+'<th style="width:25%;">tên công việc</th>'
 				+'<th style="width:10%;">nhóm thực hiện</th>'
-				+'<th style="width:10%;">mức độ ưu tiên</th>'
+				+'<th style="width:7.5%;">mức độ ưu tiên</th>'
 				+'<th style="width:15%;">ngày khởi tạo</th>'
 				+'<th style="width:15%;">ngày hết hạn</th>'
 				+'<th style="width:15%;">ngày hoàn thành</th>'
-				+'<th style="width:15%;">trạng thái</th>'
-				+'<th style="width:15%;">đánh giá</th>'
+				+'<th style="width:5%;">trạng thái</th>'
+				+'<th style="width:5%;">đánh giá</th>'
 				+'</tr>';
 				htmlcode+='<tr>'
 				+'<td><input id="inputName" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control"  onkeyup="myFunction(this.id)" ></input></td>'
@@ -120,7 +122,7 @@ function readRequest(data){
 				+'<td><input id="inputRating" placeholder="Tìm kiếm" type ="text"  style="width:95%;" class="form-control" onkeyup="myFunction(this.id)"></input></td></tr>';
 				var n = data.length;
 				for(i = 0 ; i <n;i++){
-					htmlcode+="<tr onclick='showfunction()'>"
+					htmlcode+="<tr onclick='showfunction("+ data[i].RequestID+","+data[i].RequestID")'>"
 						 +"<td><a href='#'>"+data[i].ReqSpec+"</a></td>"
 						 +"<td><a href='#'>"+data[i].Priority+"</a></td>"
 						 +"<td><a href='#'>"+data[i].TeamName+"</a></td>"
